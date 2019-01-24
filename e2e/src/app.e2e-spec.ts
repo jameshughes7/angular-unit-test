@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 
 describe('workspace-project App', () => {
-  let page: AppPage = new AppPage();
+  const page: AppPage = new AppPage();
 
   beforeEach(() => {
     page.navigateTo();
@@ -17,9 +17,10 @@ describe('workspace-project App', () => {
 
   it(`should display quote input box`, () => {
     const inputBox = page.getQuoteInput();
-    inputBox.sendKeys('To be or not to be...that is the question');
+    const textInput = 'To be or not to be...that is the question';
+    inputBox.sendKeys(textInput);
     const submitButton = page.getQuoteSubmitButton();
     submitButton.click();
-    expect(page.getFirstQuoteOutputCard()).toEqual('To be or not to be...that is the question');
+    expect(page.getFirstQuoteOutputCard()).toEqual(textInput);
   });
 });
