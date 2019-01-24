@@ -1,14 +1,25 @@
 import { AppPage } from './app.po';
 
 describe('workspace-project App', () => {
-  let page: AppPage;
+  let page: AppPage = new AppPage();
 
   beforeEach(() => {
-    page = new AppPage();
+    page.navigateTo();
   });
 
   it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to angular-unit-test!');
+    expect(page.getHeadingText()).toEqual('What Quote is on your mind ?');
+  });
+
+  it(`should display 'Create a new quote`, () => {
+    expect(page.getQuoteSubmitButton().getText()).toEqual('Create a new quote');
+  });
+
+  it(`should display quote input box`, () => {
+    const inputBox = page.getQuoteInput();
+    inputBox.sendKeys('To be or not to be...that is the question');
+    const submitButton = page.getQuoteSubmitButton();
+    submitButton.click();
+    expect(page.getFirstQuoteOutputCard()).toEqual('To be or not to be...that is the question');
   });
 });
